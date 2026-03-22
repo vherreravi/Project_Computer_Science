@@ -105,6 +105,26 @@ def calculate_score(rooms_visited, has_treasure, traps_hit):
     pass  # ← DELETE this line and write your solution
 
 
+def is_game_lost(score):
+    """
+    Decide whether the player has lost the game.
+
+    Rules:
+        - If the score is 0, the player loses → return True
+        - Otherwise the game continues        → return False
+
+    Example:
+        is_game_lost(0)    →  True
+        is_game_lost(70)   →  False
+        is_game_lost(310)  →  False
+
+    HINT: This is just one line — a simple comparison!
+
+    TODO: Replace 'pass' with your code.
+    """
+    pass  # ← DELETE this line and write your solution
+
+
 # ============================================================
 #  ⚙️  GAME ENGINE — Do not edit below this line!
 # ============================================================
@@ -167,6 +187,16 @@ class GameState:
         elif trap_result:
             self.traps_hit += 1
             events.append("💥 TRAP! You lost some health! (-30 pts)")
+
+        # Loss check — runs after every trap to see if score has hit 0
+        current_score = self.get_score()
+        if isinstance(current_score, int):
+            lost_result, not_impl = safe_call(is_game_lost, current_score)
+            if not_impl:
+                events.append("⚠️ is_game_lost() not done yet!")
+            elif lost_result and not self.game_over:
+                events.append("💀 Your score hit 0... YOU LOSE! Game over.")
+                self.game_over = True
 
         # Treasure check
         treasure_result, not_impl = safe_call(check_for_treasure, room_number, self.has_key)
@@ -295,7 +325,10 @@ def build_game_gui():
             entry = game.log[-1]
             log_text.insert("end", "\n" + "─"*40 + "\n" + entry + "\n")
             if game.game_over:
-                log_text.insert("end", f"\n🎉 GAME OVER! Final Score: {game.get_score()}\n")
+                if game.has_treasure:
+                    log_text.insert("end", f"\n🎉 YOU WIN! Final Score: {game.get_score()}\n")
+                else:
+                    log_text.insert("end", f"\n💀 YOU LOSE! Final Score: {game.get_score()}\n")
             log_text.see("end")
         log_text.config(state="disabled")
 

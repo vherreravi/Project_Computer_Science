@@ -1,4 +1,4 @@
-# 🎓 Student Python Projects
+# 🎓 Student Python Project Intro to Computer Science
 
 A beginner-friendly collection of Python mini-projects.  
 Students write the **logic functions** — the GUI and game engine are already built and waiting.

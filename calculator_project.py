@@ -1,6 +1,6 @@
 """
 =============================================
-  🧮 STUDENT PROJECT: Simple Calculator
+  🧮  Simple Calculator
   Beginner Python + Tkinter GUI
 =============================================
 
