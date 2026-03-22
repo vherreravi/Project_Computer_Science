@@ -8,7 +8,7 @@ git checkout -b student/firstname-lastname
 # 3. After writing your functions check what has changed
 git status
 
-# 4. Stage their changes (This is where commit happens)
+# 4. Stage your changes (This is where commit happens)
 git add .
 
 # 5. Commit with a message
